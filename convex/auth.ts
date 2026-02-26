@@ -12,49 +12,21 @@ export const authClient = createClient(components.betterAuth);
 // Frontend URL - defaults to localhost for dev
 const siteUrl = process.env.SITE_URL ?? "http://localhost:5173";
 
-// Get trusted origins based on the incoming request
-function getTrustedOrigins(request?: Request): string[] {
-  const origins: string[] = [];
-
-  // Always trust the configured site URL
-  if (siteUrl) {
-    origins.push(siteUrl);
-  }
-
-  // Explicit additional origins from env (for custom domains in prod)
-  if (process.env.BETTER_AUTH_TRUSTED_ORIGINS) {
-    const explicit = process.env.BETTER_AUTH_TRUSTED_ORIGINS.split(",").map(
-      (o) => o.trim()
-    );
-    origins.push(...explicit);
-  }
-
-  // Dynamically trust the request origin if it matches allowed patterns
-  const requestOrigin = request?.headers.get("origin");
-  if (requestOrigin) {
-    // Localhost (any port)
-    if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(requestOrigin)) {
-      origins.push(requestOrigin);
-    }
-    // WebContainers (dev environments)
-    else if (requestOrigin.endsWith(".local-corp.webcontainer-api.io")) {
-      origins.push(requestOrigin);
-    }
-    // Vercel deployments (previews + production)
-    else if (requestOrigin.endsWith(".vercel.app")) {
-      origins.push(requestOrigin);
-    }
-  }
-
-  return origins;
-}
+// Trusted origins for CORS - use wildcard patterns
+const trustedOrigins = [
+  siteUrl,
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "*.vercel.app", // All Vercel deployments
+  "*.local-corp.webcontainer-api.io", // WebContainers
+];
 
 export function createAuth(ctx: GenericCtx<GenericDataModel>) {
   return betterAuth({
     baseURL: process.env.CONVEX_SITE_URL,
     secret: process.env.BETTER_AUTH_SECRET,
     database: convexAdapter(ctx, components.betterAuth),
-    trustedOrigins: getTrustedOrigins,
+    trustedOrigins,
     session: {
       cookieCache: {
         enabled: false,
