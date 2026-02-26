@@ -1,0 +1,9 @@
+export { default as AdminDashboardPage } from "./AdminDashboardPage";
+export { default as AdminAppointmentsPage } from "./AdminAppointmentsPage";
+export { default as AdminEncountersPage } from "./AdminEncountersPage";
+export { default as AdminMessagesPage } from "./AdminMessagesPage";
+export { default as AdminPatientsPage } from "./AdminPatientsPage";
+export { default as AdminPatientDetailPage } from "./AdminPatientDetailPage";
+export { default as AdminProvidersPage } from "./AdminProvidersPage";
+export { default as AdminProviderDetailPage } from "./AdminProviderDetailPage";
+export { default as AdminSettingsPage } from "./AdminSettingsPage";

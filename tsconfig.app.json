@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "types": ["vite/client", "node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    /* Path aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@convex-dev/better-auth": ["src/types/convex-dev-better-auth"],
+      "@convex-dev/better-auth/plugins": [
+        "src/types/convex-dev-better-auth-plugins"
+      ],
+      "@convex-dev/better-auth/react": ["src/types/convex-dev-better-auth-react"],
+      "@convex-dev/better-auth/client/plugins": [
+        "src/types/convex-dev-better-auth-client-plugins"
+      ],
+      "@convex-dev/better-auth/auth-config": [
+        "src/types/convex-dev-better-auth-auth-config"
+      ],
+      "@convex-dev/better-auth/convex.config": [
+        "src/types/convex-dev-better-auth-convex-config"
+      ]
+    }
+  },
+  "include": ["src"]
+}

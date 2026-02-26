@@ -1,0 +1,129 @@
+{
+  "name": "codex-telehealth-cometchat",
+  "version": "1.0.0",
+  "description": "Production-ready telehealth platform with CometChat video consultations and messaging",
+  "category": "Healthcare",
+  "tags": ["telehealth", "healthcare", "video-calling", "messaging", "appointments", "EMR", "HIPAA"],
+  "features": [
+    "Three-role authentication (Patient, Provider, Admin)",
+    "Patient intake/onboarding (6-step wizard)",
+    "Provider profile management with license verification",
+    "Appointment scheduling with timezone support",
+    "CometChat video calls and messaging",
+    "EMR with SOAP notes documentation",
+    "Medical history tracking (conditions, medications, allergies)",
+    "In-app notification system",
+    "Admin dashboard with platform analytics"
+  ],
+  "requiredEnvVars": [
+    {
+      "name": "VITE_COMETCHAT_APP_ID",
+      "description": "CometChat application ID",
+      "type": "client"
+    },
+    {
+      "name": "VITE_COMETCHAT_REGION",
+      "description": "CometChat region (e.g., 'us', 'eu')",
+      "type": "client"
+    },
+    {
+      "name": "COMETCHAT_APP_ID",
+      "description": "CometChat application ID (Convex env)",
+      "type": "server"
+    },
+    {
+      "name": "COMETCHAT_API_KEY",
+      "description": "CometChat API key (Convex env)",
+      "type": "server"
+    },
+    {
+      "name": "COMETCHAT_REGION",
+      "description": "CometChat region (Convex env, e.g., 'us', 'eu')",
+      "type": "server"
+    },
+    {
+      "name": "BETTER_AUTH_SECRET",
+      "description": "Secret key for Better Auth",
+      "type": "server"
+    },
+    {
+      "name": "RESEND_API_KEY",
+      "description": "Resend API key for email delivery",
+      "type": "server"
+    },
+    {
+      "name": "AUTH_EMAIL",
+      "description": "Sender email address for authentication emails",
+      "type": "server"
+    },
+    {
+      "name": "SITE_URL",
+      "description": "Public URL of the application",
+      "type": "server"
+    }
+  ],
+  "routes": {
+    "patient": [
+      { "path": "/intake", "description": "Patient intake wizard" },
+      { "path": "/patient/dashboard", "description": "Patient dashboard" },
+      { "path": "/patient/schedule", "description": "Book appointment" },
+      { "path": "/patient/bookings", "description": "View appointments" },
+      { "path": "/patient/messages", "description": "CometChat inbox" },
+      { "path": "/patient/health", "description": "Health records" },
+      { "path": "/patient/profile", "description": "Edit profile" },
+      { "path": "/patient/support", "description": "Help & FAQ" }
+    ],
+    "provider": [
+      { "path": "/provider/dashboard", "description": "Provider dashboard" },
+      { "path": "/provider/patients", "description": "Patient list" },
+      { "path": "/provider/patients/:id/chart", "description": "Patient chart" },
+      { "path": "/provider/encounter/:id", "description": "Encounter/SOAP notes" },
+      { "path": "/provider/appointments", "description": "Manage appointments" },
+      { "path": "/provider/availability", "description": "Set schedule" },
+      { "path": "/provider/messages", "description": "CometChat inbox" },
+      { "path": "/provider/profile", "description": "Provider profile" }
+    ],
+    "admin": [
+      { "path": "/admin/dashboard", "description": "Admin dashboard" },
+      { "path": "/admin/patients", "description": "Manage patients" },
+      { "path": "/admin/providers", "description": "Manage providers" },
+      { "path": "/admin/messages", "description": "CometChat inbox" },
+      { "path": "/admin/settings", "description": "Platform settings" }
+    ],
+    "shared": [
+      { "path": "/call/:sessionId", "description": "Video call room" }
+    ]
+  },
+  "databaseTables": [
+    "patientIntake",
+    "providerProfiles",
+    "providerAvailability",
+    "appointments",
+    "encounters",
+    "soapNotes",
+    "encounterAddendums",
+    "medicalConditions",
+    "medications",
+    "allergies",
+    "notifications",
+    "cometChatUsers"
+  ],
+  "dependencies": {
+    "@cometchat/chat-sdk-javascript": "^4.x",
+    "@cometchat/chat-uikit-react": "^6.x",
+    "@cometchat/calls-sdk-javascript": "^4.x",
+    "date-fns": "^4.x",
+    "react-hot-toast": "^2.x"
+  },
+  "setup": {
+    "steps": [
+      "Clone this template",
+      "Run 'pnpm install' to install dependencies",
+      "Set up CometChat account at dashboard.cometchat.com",
+      "Configure environment variables (copy .env.example to .env.local)",
+      "Run 'npx convex dev' to start Convex backend",
+      "Run 'pnpm dev:vite' to start frontend",
+      "Create an admin account with 'npx convex run seed/admin:seedAdmin'"
+    ]
+  }
+}

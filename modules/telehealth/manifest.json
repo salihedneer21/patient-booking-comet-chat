@@ -1,0 +1,54 @@
+{
+  "name": "telehealth",
+  "version": "1.0.0",
+  "description": "Telehealth module with CometChat messaging + video sessions (Patient/Provider/Admin).",
+  "routes": [
+    "/intake",
+    "/patient/dashboard",
+    "/patient/schedule",
+    "/patient/bookings",
+    "/patient/messages",
+    "/patient/health",
+    "/patient/profile",
+    "/patient/support",
+    "/provider/dashboard",
+    "/provider/patients",
+    "/provider/patients/:patientId/chart",
+    "/provider/encounter/new",
+    "/provider/encounter/:encounterId",
+    "/provider/appointments",
+    "/provider/availability",
+    "/provider/messages",
+    "/provider/profile",
+    "/admin/dashboard",
+    "/admin/patients",
+    "/admin/providers",
+    "/admin/messages",
+    "/admin/settings",
+    "/call/:sessionId"
+  ],
+  "databaseTables": [
+    "patientIntake",
+    "providerProfiles",
+    "providerAvailability",
+    "appointments",
+    "encounters",
+    "soapNotes",
+    "encounterAddendums",
+    "medicalConditions",
+    "medications",
+    "allergies",
+    "notifications",
+    "cometChatUsers"
+  ],
+  "dependencies": [
+    "@cometchat/chat-sdk-javascript",
+    "@cometchat/chat-uikit-react",
+    "@cometchat/calls-sdk-javascript"
+  ],
+  "env": {
+    "client": ["VITE_COMETCHAT_APP_ID", "VITE_COMETCHAT_REGION"],
+    "server": ["COMETCHAT_APP_ID", "COMETCHAT_API_KEY", "COMETCHAT_REGION"]
+  }
+}
+
