@@ -12,13 +12,12 @@ export const authClient = createClient(components.betterAuth);
 // Frontend URL - defaults to localhost for dev
 const siteUrl = process.env.SITE_URL ?? "http://localhost:5173";
 
-// Trusted origins for CORS - use wildcard patterns
+// Trusted origins for CORS - explicit URLs
 const trustedOrigins = [
   siteUrl,
   "http://localhost:5173",
   "http://localhost:3000",
-  "*.vercel.app", // All Vercel deployments
-  "*.local-corp.webcontainer-api.io", // WebContainers
+  "https://patient-booking-comet-chat.vercel.app",
 ];
 
 export function createAuth(ctx: GenericCtx<GenericDataModel>) {
